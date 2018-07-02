@@ -2,8 +2,8 @@
 
 # Name of MongoDB Replica Set
 #replset='vivo_01'
-replset=`/var/lib/mongodb-mms-automation/mongodb-linux-x86_64-3.6.2/bin/mongo --host localhost:36035 --eval 'rs.conf()._id' --quiet`
-#replset=`/usr/bin/mongo --host localhost:36035 --eval 'rs.conf()._id' --quiet`
+replset=`/var/lib/mongodb-mms-automation/mongodb-linux-x86_64-3.6.2/bin/mongo --host localhost:27017 --eval 'rs.conf()._id' --quiet`
+#replset=`/usr/bin/mongo --host localhost:27017 --eval 'rs.conf()._id' --quiet`
 
 # Assign variables & set-up files
 WKDIR=/data/backup
@@ -24,8 +24,7 @@ cp /var/scripts/backup/email/failure-template.html /var/scripts/backup/email/fai
 # Create the backup folder
 mkdir $DEST
 # Run mongodump - backup all databases
-/var/lib/mongodb-mms-automation/mongodb-linux-x86_64-3.6.2/bin/mongodump --host mgdb114.back.stage.telhc.local:36035,mgdb801.back.stage.lbh.local:36035,mgdb802.back.stage.lbh.local:36035 --username=backup --password=password --authenticationDatabase=admin --oplog --out $DEST \
-#/usr/bin/mongodump --host localhost --port 36035 --username=mongo --password=mongo --authenticationDatabase=admin --oplog --out $DEST \
+/var/lib/mongodb-mms-automation/mongodb-linux-x86_64-3.6.2/bin/mongodump --host node1:27017,node2:27017,node3:27017 --username=xxxxxx --password=xxxxxx --authenticationDatabase=xxxxxx --oplog --out $DEST \
 >> $LOG 2>&1
 
 
